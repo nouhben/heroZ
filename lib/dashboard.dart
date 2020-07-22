@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:heroz/background_clipper.dart';
-import 'package:heroz/detail_page.dart';
+import 'package:heroz/widgets/hero_card.dart';
 
 class Dashboard extends StatefulWidget {
   @override
@@ -13,41 +12,39 @@ class _DashboardState extends State<Dashboard> {
     return Scaffold(
       appBar: AppBar(),
       body: SafeArea(
-        child: Center(
-          child: ClipPath(
-            clipper: BackgroundClipper(),
-            child: InkWell(
-              onTap: () {
-//                Navigator.push(
-//                  context,
-//                  MaterialPageRoute(builder: (context) => DetailPage()),
-//                );
-                Navigator.push(
-                  context,
-                  PageRouteBuilder(
-                    pageBuilder: (context, a, b) => DetailPage(),
-                    transitionDuration: Duration(milliseconds: 200),
-                  ),
-                );
-              },
-              child: Hero(
-                tag: 'dashboard',
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.6,
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        Colors.orange,
-                        Colors.deepOrangeAccent,
-                      ],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                    ),
-                  ),
+        child: Padding(
+          padding: EdgeInsets.all(32.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 34.0, letterSpacing: 3.0),
+                  children: <TextSpan>[
+                    TextSpan(text: 'We save ', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 25.0)),
+                    TextSpan(text: 'the World in ', style: TextStyle(fontWeight: FontWeight.w400, fontSize: 25.0)),
+                    TextSpan(text: 'Fiction', style: TextStyle(color: Colors.deepOrange)),
+                  ],
                 ),
               ),
-            ),
+              RichText(
+                textAlign: TextAlign.start,
+                text: TextSpan(
+                  style: TextStyle(fontWeight: FontWeight.w200, fontSize: 24.0, letterSpacing: 3.0),
+                  children: <TextSpan>[
+                    TextSpan(text: 'Doctors', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 35.0, color: Colors.deepPurpleAccent)),
+                    TextSpan(text: ' & ', style: TextStyle(fontWeight: FontWeight.w200, fontSize: 25.0, color: Colors.grey)),
+                    TextSpan(text: 'Firefighters ', style: TextStyle(fontWeight: FontWeight.w900, fontSize: 35.0, color: Colors.deepOrange)),
+                    TextSpan(text: 'do it for real '),
+                  ],
+                ),
+              ),
+              Expanded(
+                child: HeroCard(),
+              ),
+            ],
           ),
         ),
       ),
